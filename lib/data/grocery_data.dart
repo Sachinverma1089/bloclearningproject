@@ -4,33 +4,33 @@ class GroceryData {
       "id": '1',
       "name": "Organic Bananas",
       "category": "Fruits",
-      "price": '2.99',
+      "price": '60 per/dozen',
       "imageUrl":
-          "https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg?quality=90&resize=440,400"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Cavendish_Banana_DS.jpg/1200px-Cavendish_Banana_DS.jpg"
     },
     {
       "id": '2',
       "name": "Almond Milk",
       "category": "Beverages",
-      "price": '3.49',
+      "price": '100',
       "imageUrl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkp80-u_l9wdPoWTMaXdBa2t5PdTVokVPHVg&s"
+          "https://i5.walmartimages.com/seo/Almond-Breeze-Original-Almond-Milk-64-oz-Bottle_77d7a343-9292-4c92-8f78-c92d40e3083c.359ab52b5368fe8b016e06ad69f65f00.jpeg"
     },
     {
       "id": '3',
       "name": "Whole Wheat Bread",
       "category": "Bakery",
-      "price": '2.50',
+      "price": '50',
       "imageUrl":
-          "https://images-cdn.ubuy.co.in/65398476af3553788d07aff0-freshness-french-bread-14-oz.jpg"
+          "https://www.bigbasket.com/media/uploads/p/xxl/40314806_1-britannia-100-whole-wheat-sandwich-bread.jpg"
     },
     {
       "id": '4',
       "name": "Fresh Broccoli",
       "category": "Vegetables",
-      "price": '1.99',
+      "price": '100',
       "imageUrl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4sRScr14mUXyVksVKci_HAkyyEk5YsWkQDg&s"
+          "https://m.media-amazon.com/images/I/71V7l9Nd7OL._AC_UF1000,1000_QL80_.jpg"
     },
   ];
 }
