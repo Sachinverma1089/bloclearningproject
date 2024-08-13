@@ -17,16 +17,25 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   FutureOr<void> homeInitialEvent(
       HomeInitialEvent event, Emitter<HomeBlocState> emit) async {
     emit(HomeLoadingState());
-    await Future.delayed(Duration(seconds: 3));
-    emit(HomeLoadedSuccessState(
-        products: GroceryData.groceryProducts
-            .map((e) => ProductDataModel(
-                id: e['id'],
-                name: e["name"],
-                description: e['description'],
-                price: e['price'],
-                imageUrl: e['imageUrl']))
-            .toList()));
+    await Future.delayed(Duration(seconds: 2));
+
+    try {
+      final products = GroceryData.groceryProducts.map((e) {
+        print('Mapping product: $e');
+        return ProductDataModel(
+          id: e['id'],
+          name: e['name'],
+          category: e['category'],
+          price: e['price'],
+          imageUrl: e['imageUrl'],
+        );
+      }).toList();
+
+      emit(HomeLoadedSuccessState(products: products));
+    } catch (e) {
+      
+      emit(HomeErrorState());
+    }
   }
 
   FutureOr<void> homeWishlistButtonNavigateEvent(
