@@ -26,6 +26,7 @@ class HomeProductCartButtonClickedEvent extends HomeBlocEvent {
   final ProductDataModel clickedProduct;
 
   HomeProductCartButtonClickedEvent({required this.clickedProduct});
+
 }
 
 class HomeProductCartButtonUnClickedEvent extends HomeBlocEvent {
@@ -37,5 +38,4 @@ class HomeProductCartButtonUnClickedEvent extends HomeBlocEvent {
 
 
 class HomeWishlistButtonNavigateEvent extends HomeBlocEvent {}
-
 class HomeCartButtonNavigateEvent extends HomeBlocEvent {}

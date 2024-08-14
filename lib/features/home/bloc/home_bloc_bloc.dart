@@ -31,8 +31,8 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
           category: e['category'],
           price: e['price'],
           imageUrl: e['imageUrl'],
-          isClickedWishButton: e['isClickedWishButton'] ?? false,
-          isClickedCartButton: e['isClickedCartButton'] ?? false,
+          isClickedWishButton: e['isClickedWishButton']??false,
+          isClickedCartButton: e['isClickedCartButton']??false,
         );
       }).toList();
 
@@ -55,7 +55,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   FutureOr<void> homeProductWishlistButtonClickedEvent(
       HomeProductWishlistButtonClickedEvent event,
       Emitter<HomeBlocState> emit) {
-    // Toggle the wishlist state
     event.clickedProduct.isClickedWishButton =
         !event.clickedProduct.isClickedWishButton;
 
@@ -63,6 +62,8 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       wishlistItems.add(event.clickedProduct);
       emit(HomeProductItemWhishlistedActionState());
     } else {
+      
+      // Remove from wishlist after delay
       wishlistItems.remove(event.clickedProduct);
       emit(HomeProductItemUnWhishlistedActionState());
     }
@@ -77,8 +78,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
             imageUrl: e['imageUrl'],
             isClickedWishButton:
                 wishlistItems.any((item) => item.id == e['id']),
-            isClickedCartButton:
-                cartItems.any((item) => item.id == e['id']),
+            isClickedCartButton: cartItems.any((item) => item.id == e['id']),
           ))
     ]));
   }
@@ -92,9 +92,6 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     if (event.clickedProduct.isClickedCartButton) {
       cartItems.add(event.clickedProduct);
       emit(HomeProductItemCartedlistedActionState());
-    } else {
-      cartItems.remove(event.clickedProduct);
-      emit(HomeProductItemUnCartedlistedActionState());
     }
 
     // Emit the updated list to refresh the UI
@@ -107,8 +104,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
             imageUrl: e['imageUrl'],
             isClickedWishButton:
                 wishlistItems.any((item) => item.id == e['id']),
-            isClickedCartButton:
-                cartItems.any((item) => item.id == e['id']),
+            isClickedCartButton: cartItems.any((item) => item.id == e['id']),
           ))
     ]));
   }

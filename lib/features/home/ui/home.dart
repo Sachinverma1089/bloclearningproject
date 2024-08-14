@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myapp/features/cart/bloc/cart_bloc_bloc.dart';
 import 'package:myapp/features/cart/ui/cart.dart';
 import 'package:myapp/features/home/bloc/home_bloc_bloc.dart';
 import 'package:myapp/features/home/ui/product_tile_widget.dart';
-import 'package:myapp/features/wishlist/bloc/wishlist_bloc_bloc.dart';
 import 'package:myapp/features/wishlist/ui/wishlist.dart';
 
 class Home extends StatefulWidget {
@@ -16,13 +14,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final HomeBlocBloc homeBlocBloc = HomeBlocBloc();
-  
 
   @override
   void initState() {
     super.initState();
     homeBlocBloc.add(HomeInitialEvent());
-    
   }
 
   @override
