@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/features/cart/bloc/cart_bloc_bloc.dart';
 import 'package:myapp/features/cart/ui/cart_tile_widget.dart';
+import 'package:myapp/features/home/bloc/home_bloc_bloc.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -26,9 +27,14 @@ class _CartPageState extends State<CartPage> {
         ),
         body: BlocConsumer<CartBlocBloc, CartBlocState>(
           bloc: cartBlocBloc,
-          listener: (context, state) {},
-          listenWhen: (previous, current) => current is CartBlocActionState,
-          buildWhen: (previous, current) => current is !CartBlocActionState,
+          listenWhen: (previous, current) => current is CartRemoveActionState,
+          buildWhen: (previous, current) => current is! CartRemoveActionState,
+          listener: (context, state) {
+            if (state is CartRemoveActionState) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Item Removed!")));
+            }
+          },
           builder: (context, state) {
             switch (state.runtimeType) {
               case CartSuccessState:

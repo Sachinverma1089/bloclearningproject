@@ -25,13 +25,14 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
     try {
       final products = GroceryData.groceryProducts.map((e) {
-        print('Mapping product: $e');
         return ProductDataModel(
           id: e['id'],
           name: e['name'],
           category: e['category'],
           price: e['price'],
           imageUrl: e['imageUrl'],
+          isClickedWishButton: e['isClickedWishButton'] ?? false,
+          isClickedCartButton: e['isClickedCartButton'] ?? false,
         );
       }).toList();
 
@@ -43,28 +44,72 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   FutureOr<void> homeWishlistButtonNavigateEvent(
       HomeWishlistButtonNavigateEvent event, Emitter<HomeBlocState> emit) {
-    print('Wishlist Navigate Clicked');
     emit(HomeNavigateToWishListPageActionState());
   }
 
   FutureOr<void> homeCartButtonNavigateEvent(
       HomeCartButtonNavigateEvent event, Emitter<HomeBlocState> emit) {
-    print('Cart Navigate clicked');
     emit(HomeNavigateToCartPageActionState());
   }
 
   FutureOr<void> homeProductWishlistButtonClickedEvent(
       HomeProductWishlistButtonClickedEvent event,
       Emitter<HomeBlocState> emit) {
-    print('Wishlist button clicked');
-    wishlistItems.add(event.clickedProduct);
-    emit(HomeProductItemWhishlistedActionState());
+    // Toggle the wishlist state
+    event.clickedProduct.isClickedWishButton =
+        !event.clickedProduct.isClickedWishButton;
+
+    if (event.clickedProduct.isClickedWishButton) {
+      wishlistItems.add(event.clickedProduct);
+      emit(HomeProductItemWhishlistedActionState());
+    } else {
+      wishlistItems.remove(event.clickedProduct);
+      emit(HomeProductItemUnWhishlistedActionState());
+    }
+
+    // Emit the updated list to refresh the UI
+    emit(HomeLoadedSuccessState(products: [
+      ...GroceryData.groceryProducts.map((e) => ProductDataModel(
+            id: e['id'],
+            name: e['name'],
+            category: e['category'],
+            price: e['price'],
+            imageUrl: e['imageUrl'],
+            isClickedWishButton:
+                wishlistItems.any((item) => item.id == e['id']),
+            isClickedCartButton:
+                cartItems.any((item) => item.id == e['id']),
+          ))
+    ]));
   }
 
   FutureOr<void> homeProductCartButtonClickedEvent(
       HomeProductCartButtonClickedEvent event, Emitter<HomeBlocState> emit) {
-    print('Cart button clicked');
-    cartItems.add(event.clickedProduct);
-    emit(HomeProductItemCartedlistedActionState());
+    // Toggle the cart state
+    event.clickedProduct.isClickedCartButton =
+        !event.clickedProduct.isClickedCartButton;
+
+    if (event.clickedProduct.isClickedCartButton) {
+      cartItems.add(event.clickedProduct);
+      emit(HomeProductItemCartedlistedActionState());
+    } else {
+      cartItems.remove(event.clickedProduct);
+      emit(HomeProductItemUnCartedlistedActionState());
+    }
+
+    // Emit the updated list to refresh the UI
+    emit(HomeLoadedSuccessState(products: [
+      ...GroceryData.groceryProducts.map((e) => ProductDataModel(
+            id: e['id'],
+            name: e['name'],
+            category: e['category'],
+            price: e['price'],
+            imageUrl: e['imageUrl'],
+            isClickedWishButton:
+                wishlistItems.any((item) => item.id == e['id']),
+            isClickedCartButton:
+                cartItems.any((item) => item.id == e['id']),
+          ))
+    ]));
   }
 }

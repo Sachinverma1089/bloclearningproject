@@ -10,3 +10,4 @@ class CartRemoveFromCartEvent extends CartBlocEvent {
 
   CartRemoveFromCartEvent({required this.productDataModel});
 }
+

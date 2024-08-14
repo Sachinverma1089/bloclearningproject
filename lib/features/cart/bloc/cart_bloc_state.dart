@@ -11,7 +11,6 @@ class CartSuccessState extends CartBlocState {
   final List<ProductDataModel> cartItems;
 
   CartSuccessState({required this.cartItems});
-  
 }
 
-class CartRemoveActionState extends CartBlocActionState{}
+class CartRemoveActionState extends CartBlocState {}

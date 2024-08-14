@@ -23,7 +23,7 @@ class CartBlocBloc extends Bloc<CartBlocEvent, CartBlocState> {
       CartRemoveFromCartEvent event, Emitter<CartBlocState> emit) {
     cartItems.remove(event.productDataModel);
     emit(CartSuccessState(cartItems: cartItems));
-    
+    emit(CartRemoveActionState());
 
     //run a function to remove that product model from that cartItems
     //emit cartItemRemoveState

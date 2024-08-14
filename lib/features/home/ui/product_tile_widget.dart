@@ -47,7 +47,7 @@ class ProductTileWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "\₹" + productDataModel.price,
+                "\₹${productDataModel.price}",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Row(
@@ -57,16 +57,28 @@ class ProductTileWidget extends StatelessWidget {
                       homeBlocBloc.add(HomeProductWishlistButtonClickedEvent(
                           clickedProduct: productDataModel));
                     },
-                    icon: Icon(Icons.favorite_border_outlined),
-                    color: Colors.black,
+                    icon: Icon(
+                      productDataModel.isClickedWishButton
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                    ),
+                    color: productDataModel.isClickedWishButton
+                        ? Colors.teal
+                        : Colors.black,
                   ),
                   IconButton(
                     onPressed: () {
                       homeBlocBloc.add(HomeProductCartButtonClickedEvent(
                           clickedProduct: productDataModel));
                     },
-                    icon: Icon(Icons.shopping_bag_outlined),
-                    color: Colors.black,
+                    icon: Icon(
+                      productDataModel.isClickedCartButton
+                          ? Icons.shopping_bag
+                          : Icons.shopping_bag_outlined,
+                    ),
+                    color: productDataModel.isClickedCartButton
+                        ? Colors.teal
+                        : Colors.black,
                   )
                 ],
               )
